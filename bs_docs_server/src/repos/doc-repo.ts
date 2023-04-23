@@ -4,6 +4,8 @@ import fm from 'front-matter'
 import sequelize from "@src/configurations/sqlite";
 import fileService from "@src/services/file-service";
 import path from "node:path";
+import env from "../configurations/EnvVars"
+
 type Frontmatter = {
     attributes: {
         title?: string
@@ -28,7 +30,7 @@ const getSingle = async (handle: string) => {
         const readPath = path.join(process.cwd(), "git_repo", docs[0].path)
         const file = await fs.readFile(readPath, 'utf8')
         const frontmatter: Frontmatter = fm(file)
-        return { ...frontmatter, attributes: { ...frontmatter.attributes, category: docs[0].category.replaceAll("_", " ") } }
+        return { ...frontmatter, attributes: { ...frontmatter.attributes, category: docs[0].category.replaceAll("_", " "), editLink: `${env.repoURL.slice(0, -4)}/${docs[0].path}` } }
     } catch (error) {
         return error
     }
