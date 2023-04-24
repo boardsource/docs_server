@@ -5,6 +5,7 @@ import { simpleGit, SimpleGit } from 'simple-git';
 
 const repoPath = path.join(process.cwd(), "git_repo", env.repoFolder)
 const clone = async () => {
+
     try {
         await Git.clone(env.repoURL)
         return repoPath
@@ -18,6 +19,7 @@ const clone = async () => {
 }
 
 const pull = async () => {
+
     try {
         const git: SimpleGit = simpleGit(repoPath);
         await git.pull();

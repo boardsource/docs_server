@@ -30,7 +30,7 @@ const getSingle = async (handle: string) => {
         const readPath = path.join(process.cwd(), "git_repo", docs[0].path)
         const file = await fs.readFile(readPath, 'utf8')
         const frontmatter: Frontmatter = fm(file)
-        return { ...frontmatter, attributes: { ...frontmatter.attributes, category: docs[0].category.replaceAll("_", " "), editLink: `${env.repoURL.slice(0, -4)}/${docs[0].path}` } }
+        return { ...frontmatter, attributes: { ...frontmatter.attributes, category: docs[0].category.replaceAll("_", " "), editLink: `${env.repoURL.slice(0, -4)}/tree/main/${docs[0].path.slice(5)}` } }
     } catch (error) {
         return error
     }
@@ -73,9 +73,10 @@ const add = async (readPath: string, path: string, category: string) => {
         const frontmatter: Frontmatter = fm(file)
         const { title, description, author, product_link, subcategory, draft, tags, banner, thumbnail } = frontmatter.attributes
         if (frontmatter.attributes.title) {
-            const newDoc = await Doc.create({ path, category, title, description, author, product_link, subcategory, draft, tags: tags.join(","), banner, thumbnail, handle: path.replaceAll("/", "-").replaceAll(".md", "").replaceAll(".mdx", "").slice(5) })
-        }
 
+            const newDoc = await Doc.create({ path, category, title, description, author, product_link, subcategory, draft, tags: tags.join(","), banner, thumbnail, handle: path.replaceAll("/", "-").replaceAll(".md", "").replaceAll(".mdx", "").slice(5) })
+        } else {
+        }
     } catch (error) {
         console.log(error)
     }

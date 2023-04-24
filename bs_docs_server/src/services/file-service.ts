@@ -13,7 +13,9 @@ const crawlAndCreate = async () => {
         const baseIndex = splitPath.indexOf(env.repoFolder)
         splitPath.splice(0, baseIndex + 1)
         const category = splitPath[0].endsWith("md") || splitPath[0].endsWith("mdx") ? "/" : splitPath[0]
-        docRepo.add(`${gitService.repoPath}/${splitPath.join("/")}`, `${env.repoFolder}/${splitPath.join("/")}`, category)
+        const readPath = `${gitService.repoPath}/${splitPath.join("/")}`
+        const truepath = `${env.repoFolder}/${splitPath.join("/")}`
+        docRepo.add(readPath, truepath, category)
     })
 }
 export default {
