@@ -1,10 +1,5 @@
 import HttpStatusCodes from '@src/configurations/HttpStatusCodes';
-import sequelize from '@src/configurations/sqlite';
 import docRepo from '@src/repos/doc-repo';
-
-
-
-import fileService from '@src/services/file-service';
 import { IReq, IRes } from './shared/types';
 
 
@@ -13,8 +8,9 @@ import { IReq, IRes } from './shared/types';
 // Paths
 const paths = {
   categories: '/categories',
-  basePath: '/docs',
+  basePath: '/docs_api',
   get: '/all',
+  getBase: '/',
   update: '/update',
   getCategory: "/:id",
   getSingle: "/single/:id"

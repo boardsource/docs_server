@@ -6,6 +6,7 @@ import docRepo from "@src/repos/doc-repo";
 
 const goodGlob = util.promisify(glob)
 const crawlAndCreate = async () => {
+    await gitService.pull()
     const fullPathfiles = await goodGlob(`${gitService.repoPath}/**/*.md`)
     fullPathfiles.forEach((path: string) => {
         let splitPath = path.split("/")

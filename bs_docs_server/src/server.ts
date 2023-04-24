@@ -14,6 +14,7 @@ import { RouteError } from '@src/declarations/classes';
 import sequelize from './configurations/sqlite';
 import fileService from "./services/file-service"
 import cors from 'cors'
+import docsRoutes from './routes/docs-routes';
 const connect = async () => {
   try {
     await sequelize.authenticate();
@@ -45,12 +46,9 @@ if (EnvVars.nodeEnv === NodeEnvs.Dev) {
 if (EnvVars.nodeEnv === NodeEnvs.Production) {
   app.use(helmet());
 }
-
-
 // **** Add API routes **** //
-
 // Add APIs
-app.use('/api', BaseRouter);
+app.use(docsRoutes.paths.basePath, BaseRouter);
 
 // Setup error handler
 app.use((

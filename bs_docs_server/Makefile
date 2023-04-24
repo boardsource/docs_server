@@ -14,7 +14,8 @@ test:
 
 .PHONY: build
 build:
-	npm run build
+	docker build --no-cache . -t boardsource/docs-server&&docker push boardsource/docs-server
+
 
 .PHONY: clean
 clean:
